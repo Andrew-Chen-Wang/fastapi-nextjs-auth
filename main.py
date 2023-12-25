@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 
-import os
-
 import click
 import uvicorn
 
@@ -30,20 +28,13 @@ def run_fast(host, port, log_level, reload, settings: str):
     import sys
 
     sys.dont_write_bytecode = True
-    if settings not in {"production", "staging", "local"}:
-        raise ValueError(
-            f"Invalid settings value: {settings}."
-            "Must be one of: production, staging, or local"
-        )
-    os.environ["DJANGO_SETTINGS_MODULE"] = f"config.settings.{settings}"
-
     uvicorn.run(
-        "app.main:fast",
+        "app.app:app",
         host=host,
         port=port,
         log_level=log_level,
         reload=reload,
-        reload_includes=["app", "config", "manage.py"],
+        reload_includes=["app"],
     )
 
 

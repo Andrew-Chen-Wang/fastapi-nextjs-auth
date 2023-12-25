@@ -1,0 +1,6 @@
+[env]
+
+[tools]
+
+node = ['20.10.0']
+python = {version='3.12.1', virtualenv='venv'}

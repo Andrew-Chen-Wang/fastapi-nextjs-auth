@@ -1,49 +1,44 @@
-# FastAPI + Django ORM Template
+# FastAPI + NextJS Auth
 
-A GitHub template to quickly get a FastAPI project
-that needs an awesome ORM up and running.
+This is a template for a FastAPI + NextJS project with authentication.
 
-If you only need the Django ORM to write scripts,
-feel free to simply use https://github.com/Andrew-Chen-Wang/django-orm-template
-which does not include FastAPI.
-
-Includes support for:
-- Either SQLite or PostgreSQL
-- Pre-commit
-
-### Usage
+### Usage (Local)
 
 To get started, run:
 
 ```bash
+cd frontend
+npm install
+cd ..
 pip install -r requirements/local.txt
 ```
 
-To run tests, run `pytest tests/`
-
-To run the application:
+To run the backend:
 
 ```bash
 python main.py run --reload --settings=local --log-level=debug
 ```
 
-You can test FastAPI with our default view by going to http://127.0.0.1:5000/hello
+To run the frontend:
 
-To run management commands such as `makemigrations` and `migrate`:
-
-```bash
-python manage.py makemigrations core && python manage.py migrate
+```shell
+cd frontend
+npm run dev
 ```
 
 You can still run a script by adding a click command in [`main.py`](./main.py)
 
+### Usage (Production)
+
+We assume we'll deploy to a CDN with a server. We want to save
+as much latency as possible + for SEO purposes, so we will find
+which pieces of data we can pre-render.
+
 ### Credit and License
 
-This repository is based on the repository
-by [@dancaron](https://github.com/dancaron/Django-ORM)
-and reuses much of the code from https://github.com/Andrew-Chen-Wang/django-orm-template.
+Template from https://github.com/Andrew-Chen-Wang/fastapi-django-orm.
 
-This repository is a quick template repository that I personally use.
+Kudos to https://github.com/digitros/nextjs-fastapi for the NextJS template.
 
 This repository is licensed under the Apache 2.0 license
 which can be found in the [LICENSE](./LICENSE) file.
