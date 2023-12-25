@@ -1,4 +1,7 @@
+env_file = '.env'
+
 [env]
+GOOGLE_OAUTH_CLIENT_ID="224553870979-uqmvvjvhudt13mj35j0svhgr5rf20ioh.apps.googleusercontent.com"
 
 [tools]
 

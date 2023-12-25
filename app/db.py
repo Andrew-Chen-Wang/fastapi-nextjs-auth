@@ -6,9 +6,9 @@ from fastapi_users.db import (
     SQLAlchemyBaseOAuthAccountTable,
     SQLAlchemyUserDatabase,
 )
+from sqlalchemy import ForeignKey, Integer
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
-from sqlalchemy.sql.sqltypes import Integer
 
 DATABASE_URL = "sqlite+aiosqlite:///./db.sqlite3"
 
@@ -19,12 +19,15 @@ class Base(DeclarativeBase):
 
 class OAuthAccount(SQLAlchemyBaseOAuthAccountTable[int], Base):
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    user_id = mapped_column(Integer, ForeignKey("user.id", ondelete="CASCADE"))
 
 
 class User(SQLAlchemyBaseUserTable[int], Base):
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     oauth_accounts: Mapped[List[OAuthAccount]] = relationship(
-        "OAuthAccount", lazy="joined"
+        "OAuthAccount",
+        lazy="joined",
+        primaryjoin="User.id == OAuthAccount.user_id",
     )
 
 
